@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+  <defs>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="108%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/>
+    </filter>
+    <marker id="arr" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10B981"/>
+    </marker>
+    <marker id="arr-gray" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#9CA3AF"/>
+    </marker>
+    <marker id="arr-blue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3B82F6"/>
+    </marker>
+    <marker id="arr-amber" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#F59E0B"/>
+    </marker>
+    <marker id="arr-red" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#EF4444"/>
+    </marker>
+    <linearGradient id="bg-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F0FDF4"/>
+      <stop offset="100%" stop-color="#ECFDF5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="820" height="600" rx="12" fill="url(#bg-g)"/>
+
+  <!-- Title -->
+  <text x="410" y="36" text-anchor="middle" font-size="20" font-weight="700" fill="#052E16">DAG 模式 — 自動派發流程</text>
+  <text x="410" y="56" text-anchor="middle" font-size="12" fill="#059669">ready → dispatch → in-progress → result → done → 迴圈直到全部完成</text>
+
+  <!-- ===== LEFT: DAG Task Graph ===== -->
+  <g transform="translate(30, 80)">
+    <rect width="300" height="490" rx="10" fill="white" filter="url(#shadow)"/>
+    <rect width="300" height="40" rx="10" fill="#059669"/>
+    <rect y="30" width="300" height="10" fill="#059669"/>
+    <text x="150" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="white">任務依賴圖（範例）</text>
+
+    <!-- Task graph -->
+    <g transform="translate(150, 110)">
+      <!-- design -->
+      <rect x="-45" y="0" width="90" height="32" rx="6" fill="#D1FAE5" stroke="#10B981" stroke-width="2"/>
+      <circle cx="-55" cy="16" r="5" fill="#10B981"/>
+      <text x="0" y="20" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">design</text>
+
+      <!-- backend -->
+      <rect x="-120" y="70" width="90" height="32" rx="6" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5"/>
+      <circle cx="-130" cy="86" r="5" fill="#F59E0B"/>
+      <text x="-75" y="90" text-anchor="middle" font-size="11" font-weight="600" fill="#92400E">backend</text>
+
+      <!-- frontend -->
+      <rect x="30" y="70" width="90" height="32" rx="6" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5"/>
+      <circle cx="20" cy="86" r="5" fill="#F59E0B"/>
+      <text x="75" y="90" text-anchor="middle" font-size="11" font-weight="600" fill="#92400E">frontend</text>
+
+      <!-- api-test -->
+      <rect x="-120" y="140" width="90" height="32" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+      <circle cx="-130" cy="156" r="5" fill="#9CA3AF"/>
+      <text x="-75" y="160" text-anchor="middle" font-size="11" font-weight="600" fill="#4B5563">api-test</text>
+
+      <!-- e2e-test -->
+      <rect x="-45" y="210" width="90" height="32" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+      <circle cx="-55" cy="226" r="5" fill="#9CA3AF"/>
+      <text x="0" y="230" text-anchor="middle" font-size="11" font-weight="600" fill="#4B5563">e2e-test</text>
+
+      <!-- deploy -->
+      <rect x="-45" y="280" width="90" height="32" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+      <circle cx="-55" cy="296" r="5" fill="#9CA3AF"/>
+      <text x="0" y="300" text-anchor="middle" font-size="11" font-weight="600" fill="#4B5563">deploy</text>
+
+      <!-- Edges -->
+      <line x1="-15" y1="32" x2="-60" y2="66" stroke="#10B981" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="15" y1="32" x2="60" y2="66" stroke="#10B981" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="-75" y1="102" x2="-75" y2="136" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arr-gray)"/>
+      <line x1="-50" y1="102" x2="-20" y2="206" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="55" y1="102" x2="20" y2="206" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="-75" y1="172" x2="-20" y2="206" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="0" y1="242" x2="0" y2="276" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arr-gray)"/>
+    </g>
+
+    <!-- Legend -->
+    <g transform="translate(20, 440)">
+      <circle cx="8" cy="8" r="5" fill="#10B981"/>
+      <text x="20" y="12" font-size="10" fill="#374151">done</text>
+
+      <circle cx="78" cy="8" r="5" fill="#F59E0B"/>
+      <text x="90" y="12" font-size="10" fill="#374151">ready / in-progress</text>
+
+      <circle cx="208" cy="8" r="5" fill="#9CA3AF"/>
+      <text x="220" y="12" font-size="10" fill="#374151">pending (blocked)</text>
+    </g>
+  </g>
+
+  <!-- ===== RIGHT: Dispatch Loop ===== -->
+  <g transform="translate(370, 80)">
+    <rect width="420" height="490" rx="10" fill="white" filter="url(#shadow)"/>
+    <rect width="420" height="40" rx="10" fill="#059669"/>
+    <rect y="30" width="420" height="10" fill="#059669"/>
+    <text x="210" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="white">自動派發迴圈</text>
+
+    <!-- Step 1 -->
+    <g transform="translate(210, 78)">
+      <rect x="-150" y="0" width="300" height="36" rx="8" fill="#D1FAE5" stroke="#10B981" stroke-width="1.5"/>
+      <text x="0" y="14" text-anchor="middle" font-size="11" font-weight="700" fill="#065F46" font-family="monospace">$TM ready project --json</text>
+      <text x="0" y="28" text-anchor="middle" font-size="9" fill="#059669">取得所有依賴已滿足的任務</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="210" y1="118" x2="210" y2="138" stroke="#10B981" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- Step 2: Dispatch -->
+    <g transform="translate(210, 148)">
+      <rect x="-185" y="0" width="370" height="80" rx="8" fill="#FEF9C3" stroke="#F59E0B" stroke-width="1.5"/>
+      <text x="0" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#92400E">平行派發到不同 CLI Agent</text>
+
+      <!-- Three agents -->
+      <g transform="translate(-120, 35)">
+        <rect x="0" y="0" width="100" height="32" rx="5" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1"/>
+        <text x="50" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#1E40AF">Claude Code</text>
+        <text x="50" y="26" text-anchor="middle" font-size="8" fill="#3B82F6" font-family="monospace">claude -p</text>
+      </g>
+      <g transform="translate(-5, 35)">
+        <rect x="0" y="0" width="100" height="32" rx="5" fill="#FEE2E2" stroke="#EF4444" stroke-width="1"/>
+        <text x="50" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#991B1B">Codex CLI</text>
+        <text x="50" y="26" text-anchor="middle" font-size="8" fill="#EF4444" font-family="monospace">codex exec</text>
+      </g>
+      <g transform="translate(110, 35)">
+        <rect x="0" y="0" width="100" height="32" rx="5" fill="#D1FAE5" stroke="#10B981" stroke-width="1"/>
+        <text x="50" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#065F46">Gemini CLI</text>
+        <text x="50" y="26" text-anchor="middle" font-size="8" fill="#10B981" font-family="monospace">gemini -p</text>
+      </g>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="210" y1="232" x2="210" y2="252" stroke="#10B981" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- Step 3: Update status -->
+    <g transform="translate(210, 260)">
+      <rect x="-150" y="0" width="300" height="36" rx="8" fill="#D1FAE5" stroke="#10B981" stroke-width="1.5"/>
+      <text x="0" y="14" text-anchor="middle" font-size="11" font-weight="700" fill="#065F46" font-family="monospace">$TM update task in-progress</text>
+      <text x="0" y="28" text-anchor="middle" font-size="9" fill="#059669">標記任務為執行中</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="210" y1="300" x2="210" y2="318" stroke="#10B981" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- Step 4: Wait + Result -->
+    <g transform="translate(210, 326)">
+      <rect x="-150" y="0" width="300" height="36" rx="8" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+      <text x="0" y="14" text-anchor="middle" font-size="11" font-weight="600" fill="#374151">等待 Agent 回傳結果</text>
+      <text x="0" y="28" text-anchor="middle" font-size="9" fill="#6B7280">背景執行中... (wait)</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="210" y1="366" x2="210" y2="384" stroke="#10B981" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- Step 5: Record result + mark done -->
+    <g transform="translate(210, 392)">
+      <rect x="-150" y="0" width="300" height="50" rx="8" fill="#D1FAE5" stroke="#10B981" stroke-width="1.5"/>
+      <text x="0" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="#065F46" font-family="monospace">$TM result task "output..."</text>
+      <text x="0" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#065F46" font-family="monospace">$TM update task done</text>
+      <text x="0" y="46" text-anchor="middle" font-size="9" fill="#059669">記錄結果、標記完成 → 解鎖下游任務</text>
+    </g>
+
+    <!-- Loop arrow -->
+    <path d="M 370,420 C 400,420 400,78 370,78" fill="none" stroke="#10B981" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arr)"/>
+    <text x="395" y="255" font-size="10" font-weight="600" fill="#10B981" transform="rotate(90, 395, 255)">迴圈直到全部完成</text>
+
+    <!-- Completion check -->
+    <g transform="translate(210, 458)">
+      <rect x="-120" y="0" width="240" height="24" rx="4" fill="#ECFDF5"/>
+      <text x="0" y="16" text-anchor="middle" font-size="10" fill="#059669">全部 done → $TM log project → 完成!</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="410" y="588" text-anchor="middle" font-size="11" fill="#6B7280">參見 references/advanced-patterns.md 取得完整自動派發 shell script</text>
+</svg>
