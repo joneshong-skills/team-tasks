@@ -3,6 +3,7 @@ name: team-tasks
 description: This skill should be used when the user asks to "coordinate agents", "manage team tasks", "create a pipeline", "dispatch work to agents", "run parallel tasks", "start a debate", "multi-agent workflow", or discusses task orchestration, agent teams, pipeline coordination, DAG execution, or debate-style review.
 version: 0.1.0
 tools: Read, Bash, Edit
+argument-hint: "<project-name> [--mode linear|dag|debate]"
 ---
 
 # Team Tasks — 多 Agent 任務協調
