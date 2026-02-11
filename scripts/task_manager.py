@@ -209,6 +209,11 @@ def cmd_add_debater(args: argparse.Namespace) -> None:
 def cmd_status(args: argparse.Namespace) -> None:
     """Display project status."""
     proj = load_project(args.project)
+
+    if args.json:
+        print(json.dumps(proj, indent=2, ensure_ascii=False))
+        return
+
     mode = proj["mode"]
     print(f"\n📋 專案: {proj['name']}  模式: {mode}")
     if proj.get("goal"):
@@ -620,6 +625,7 @@ def main() -> int:
     # status
     p = sub.add_parser("status", help="顯示專案狀態")
     p.add_argument("project")
+    p.add_argument("--json", action="store_true")
 
     # next (linear)
     p = sub.add_parser("next", help="取得下一階段 (linear)")
