@@ -4,6 +4,10 @@
 
 Claude Code 的多代理任務協調。使用 JSON 任務檔案編排開發工作流程，支援三種模式：線性管線、DAG 並行執行和多方辯論。
 
+<p align="center">
+  <img src="docs/three-modes-overview.svg" alt="三種模式總覽" width="800"/>
+</p>
+
 ## 功能特色
 
 `team-tasks` 提供 Python CLI（`task_manager.py`），讓您可以：
@@ -57,7 +61,17 @@ $TM add my-feature e2e-test -a test-agent --deps "backend,frontend" --desc "E2E 
 $TM ready my-feature   # 顯示所有依賴都已滿足的任務
 ```
 
+### DAG 派發流程
+
+<p align="center">
+  <img src="docs/dag-dispatch-flow.svg" alt="DAG 派發流程" width="700"/>
+</p>
+
 ### 辯論模式
+
+<p align="center">
+  <img src="docs/debate-mode-flow.svg" alt="辯論模式流程" width="600"/>
+</p>
 
 ```bash
 $TM init arch-review --mode debate -g "Microservices vs monolith?"
@@ -99,6 +113,10 @@ $TM update my-feature "$task" done
 | `log <project>` | 線性/DAG | 顯示執行日誌 |
 | `reset <project>` | 全部 | 重置所有狀態 |
 | `list` | -- | 列出所有專案 |
+
+## 致謝
+
+靈感來自 [win4r/team-tasks](https://github.com/win4r/team-tasks) — 原始的 OpenClaw 多代理管線協調概念。本專案為獨立實作，針對 Claude Code 量身打造，並加入 headless agent 派發、混合 CLI 支援、JSON 輸出等功能。
 
 ## 授權
 

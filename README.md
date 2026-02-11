@@ -4,6 +4,10 @@
 
 Multi-agent task coordination for Claude Code. Orchestrate development workflows using JSON task files with three modes: linear pipelines, DAG-based parallel execution, and multi-party debate.
 
+<p align="center">
+  <img src="docs/three-modes-overview.svg" alt="Three Modes Overview" width="800"/>
+</p>
+
 ## What It Does
 
 `team-tasks` provides a Python CLI (`task_manager.py`) that lets you:
@@ -57,7 +61,17 @@ $TM add my-feature e2e-test -a test-agent --deps "backend,frontend" --desc "E2E 
 $TM ready my-feature   # shows tasks with all dependencies met
 ```
 
+### DAG Dispatch Flow
+
+<p align="center">
+  <img src="docs/dag-dispatch-flow.svg" alt="DAG Dispatch Flow" width="700"/>
+</p>
+
 ### Debate Mode
+
+<p align="center">
+  <img src="docs/debate-mode-flow.svg" alt="Debate Mode Flow" width="600"/>
+</p>
 
 ```bash
 $TM init arch-review --mode debate -g "Microservices vs monolith?"
@@ -99,6 +113,10 @@ $TM update my-feature "$task" done
 | `log <project>` | Linear/DAG | Show execution log |
 | `reset <project>` | All | Reset all state |
 | `list` | -- | List all projects |
+
+## Acknowledgements
+
+Inspired by [win4r/team-tasks](https://github.com/win4r/team-tasks) — the original multi-agent pipeline coordination concept for OpenClaw. This is an independent implementation tailored for Claude Code with additional features (headless agent dispatch, mixed CLI support, JSON output).
 
 ## License
 
