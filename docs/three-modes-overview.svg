@@ -1,180 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
-  <defs>
-    <filter id="shadow" x="-4%" y="-4%" width="108%" height="108%">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/>
-    </filter>
-    <marker id="arrow-gray" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#9CA3AF"/>
-    </marker>
-    <marker id="arrow-blue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#3B82F6"/>
-    </marker>
-    <marker id="arrow-green" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#10B981"/>
-    </marker>
-    <marker id="arrow-purple" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#8B5CF6"/>
-    </marker>
-    <linearGradient id="bg-grad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#F8FAFC"/>
-      <stop offset="100%" stop-color="#F1F5F9"/>
-    </linearGradient>
-  </defs>
-
-  <!-- Background -->
-  <rect width="960" height="520" rx="12" fill="url(#bg-grad)"/>
-
-  <!-- Title -->
-  <text x="480" y="42" text-anchor="middle" font-size="20" font-weight="700" fill="#0F172A">Team Tasks — 三種協調模式</text>
-  <text x="480" y="64" text-anchor="middle" font-size="13" fill="#64748B">task_manager.py 支援 Linear、DAG、Debate 三種模式，適用不同任務場景</text>
-
-  <!-- ==================== LINEAR ==================== -->
-  <g transform="translate(20, 90)">
-    <!-- Card -->
-    <rect width="290" height="400" rx="10" fill="white" filter="url(#shadow)"/>
-    <rect width="290" height="48" rx="10" fill="#3B82F6"/>
-    <rect y="38" width="290" height="10" fill="#3B82F6"/>
-    <text x="145" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="white">Linear — 依序 Pipeline</text>
-
-    <!-- Use cases -->
-    <text x="20" y="72" font-size="11" fill="#64748B">適用：Bug 修復、逐步驗證、固定流程</text>
-
-    <!-- Pipeline visualization -->
-    <g transform="translate(145, 160)">
-      <!-- Nodes -->
-      <rect x="-40" y="-100" width="80" height="34" rx="6" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
-      <text x="0" y="-78" text-anchor="middle" font-size="11" font-weight="600" fill="#1E40AF">analyzer</text>
-
-      <rect x="-40" y="-45" width="80" height="34" rx="6" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
-      <text x="0" y="-23" text-anchor="middle" font-size="11" font-weight="600" fill="#1E40AF">implementer</text>
-
-      <rect x="-40" y="10" width="80" height="34" rx="6" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
-      <text x="0" y="32" text-anchor="middle" font-size="11" font-weight="600" fill="#1E40AF">tester</text>
-
-      <rect x="-40" y="65" width="80" height="34" rx="6" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
-      <text x="0" y="87" text-anchor="middle" font-size="11" font-weight="600" fill="#1E40AF">deployer</text>
-
-      <!-- Arrows -->
-      <line x1="0" y1="-66" x2="0" y2="-49" stroke="#3B82F6" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
-      <line x1="0" y1="-11" x2="0" y2="6" stroke="#3B82F6" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
-      <line x1="0" y1="44" x2="0" y2="61" stroke="#3B82F6" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
-
-      <!-- Auto-advance label -->
-      <text x="55" y="-52" font-size="9" fill="#3B82F6" font-style="italic">auto</text>
-      <text x="55" y="2" font-size="9" fill="#3B82F6" font-style="italic">auto</text>
-      <text x="55" y="57" font-size="9" fill="#3B82F6" font-style="italic">auto</text>
-    </g>
-
-    <!-- Commands -->
-    <g transform="translate(20, 310)">
-      <text font-size="10" font-weight="600" fill="#374151">核心指令：</text>
-      <text y="18" font-size="10" fill="#6B7280" font-family="monospace">init --mode linear -p "a,b,c"</text>
-      <text y="34" font-size="10" fill="#6B7280" font-family="monospace">next  → 取得下一階段</text>
-      <text y="50" font-size="10" fill="#6B7280" font-family="monospace">update done → 自動推進</text>
-    </g>
-  </g>
-
-  <!-- ==================== DAG ==================== -->
-  <g transform="translate(335, 90)">
-    <!-- Card -->
-    <rect width="290" height="400" rx="10" fill="white" filter="url(#shadow)"/>
-    <rect width="290" height="48" rx="10" fill="#10B981"/>
-    <rect y="38" width="290" height="10" fill="#10B981"/>
-    <text x="145" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="white">DAG — 依賴圖平行執行</text>
-
-    <!-- Use cases -->
-    <text x="20" y="72" font-size="11" fill="#64748B">適用：大型功能、多模組並行、複雜依賴鏈</text>
-
-    <!-- DAG visualization -->
-    <g transform="translate(145, 150)">
-      <!-- design node -->
-      <rect x="-40" y="-80" width="80" height="34" rx="6" fill="#D1FAE5" stroke="#10B981" stroke-width="1.5"/>
-      <text x="0" y="-58" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">design</text>
-
-      <!-- backend node -->
-      <rect x="-105" y="-15" width="80" height="34" rx="6" fill="#D1FAE5" stroke="#10B981" stroke-width="1.5"/>
-      <text x="-65" y="7" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">backend</text>
-
-      <!-- frontend node -->
-      <rect x="25" y="-15" width="80" height="34" rx="6" fill="#D1FAE5" stroke="#10B981" stroke-width="1.5"/>
-      <text x="65" y="7" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">frontend</text>
-
-      <!-- e2e-test node -->
-      <rect x="-40" y="50" width="80" height="34" rx="6" fill="#D1FAE5" stroke="#10B981" stroke-width="1.5"/>
-      <text x="0" y="72" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">e2e-test</text>
-
-      <!-- Arrows: design → backend, design → frontend -->
-      <line x1="-15" y1="-46" x2="-50" y2="-19" stroke="#10B981" stroke-width="1.5" marker-end="url(#arrow-green)"/>
-      <line x1="15" y1="-46" x2="50" y2="-19" stroke="#10B981" stroke-width="1.5" marker-end="url(#arrow-green)"/>
-
-      <!-- Arrows: backend → e2e, frontend → e2e -->
-      <line x1="-50" y1="19" x2="-15" y2="46" stroke="#10B981" stroke-width="1.5" marker-end="url(#arrow-green)"/>
-      <line x1="50" y1="19" x2="15" y2="46" stroke="#10B981" stroke-width="1.5" marker-end="url(#arrow-green)"/>
-
-      <!-- Parallel label -->
-      <text x="0" y="-2" text-anchor="middle" font-size="9" fill="#10B981" font-weight="600">parallel</text>
-    </g>
-
-    <!-- Commands -->
-    <g transform="translate(20, 310)">
-      <text font-size="10" font-weight="600" fill="#374151">核心指令：</text>
-      <text y="18" font-size="10" fill="#6B7280" font-family="monospace">add --deps "a,b" --agent x</text>
-      <text y="34" font-size="10" fill="#6B7280" font-family="monospace">ready → 列出可派發任務</text>
-      <text y="50" font-size="10" fill="#6B7280" font-family="monospace">graph → 視覺化依賴結構</text>
-    </g>
-  </g>
-
-  <!-- ==================== DEBATE ==================== -->
-  <g transform="translate(650, 90)">
-    <!-- Card -->
-    <rect width="290" height="400" rx="10" fill="white" filter="url(#shadow)"/>
-    <rect width="290" height="48" rx="10" fill="#8B5CF6"/>
-    <rect y="38" width="290" height="10" fill="#8B5CF6"/>
-    <text x="145" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="white">Debate — 多方辯論</text>
-
-    <!-- Use cases -->
-    <text x="20" y="72" font-size="11" fill="#64748B">適用：架構決策、Code Review、技術選型</text>
-
-    <!-- Debate visualization -->
-    <g transform="translate(145, 170)">
-      <!-- Center synthesis -->
-      <circle cx="0" cy="0" r="24" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="1.5"/>
-      <text x="0" y="4" text-anchor="middle" font-size="9" font-weight="700" fill="#5B21B6">綜合</text>
-
-      <!-- Debater 1 (top) -->
-      <rect x="-36" y="-95" width="72" height="30" rx="6" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="1.5"/>
-      <text x="0" y="-75" text-anchor="middle" font-size="10" font-weight="600" fill="#5B21B6">Expert A</text>
-
-      <!-- Debater 2 (bottom-left) -->
-      <rect x="-110" y="40" width="72" height="30" rx="6" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="1.5"/>
-      <text x="-74" y="60" text-anchor="middle" font-size="10" font-weight="600" fill="#5B21B6">Expert B</text>
-
-      <!-- Debater 3 (bottom-right) -->
-      <rect x="38" y="40" width="72" height="30" rx="6" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="1.5"/>
-      <text x="74" y="60" text-anchor="middle" font-size="10" font-weight="600" fill="#5B21B6">Expert C</text>
-
-      <!-- Arrows to center -->
-      <line x1="0" y1="-65" x2="0" y2="-28" stroke="#8B5CF6" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
-      <line x1="-55" y1="40" x2="-18" y2="15" stroke="#8B5CF6" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
-      <line x1="55" y1="40" x2="18" y2="15" stroke="#8B5CF6" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
-
-      <!-- Cross-review arcs -->
-      <path d="M -30,-68 C -80,-40 -100,10 -95,40" fill="none" stroke="#C4B5FD" stroke-width="1" stroke-dasharray="4,3"/>
-      <path d="M 30,-68 C 80,-40 100,10 95,40" fill="none" stroke="#C4B5FD" stroke-width="1" stroke-dasharray="4,3"/>
-      <path d="M -38,55 L 38,55" fill="none" stroke="#C4B5FD" stroke-width="1" stroke-dasharray="4,3"/>
-
-      <text x="85" y="-18" font-size="8" fill="#A78BFA" font-style="italic">cross-review</text>
-    </g>
-
-    <!-- Commands -->
-    <g transform="translate(20, 310)">
-      <text font-size="10" font-weight="600" fill="#374151">核心指令：</text>
-      <text y="18" font-size="10" fill="#6B7280" font-family="monospace">add-debater --perspective "..."</text>
-      <text y="34" font-size="10" fill="#6B7280" font-family="monospace">round start|submit|cross-review</text>
-      <text y="50" font-size="10" fill="#6B7280" font-family="monospace">round synthesize → 綜合結論</text>
-    </g>
-  </g>
-
-  <!-- Footer -->
-  <text x="480" y="508" text-anchor="middle" font-size="11" fill="#94A3B8">CLI: python3 ~/.claude/skills/team-tasks/scripts/task_manager.py</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 737.2750000000002 760" width="737.2750000000002" height="760" style="--bg:#ffffff;--fg:#1f2328;--line:#d1d9e0;--accent:#0969da;--muted:#59636e">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 30%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="4.8" refX="8" refY="2.4" orient="auto">
+    <polygon points="0 0, 8 2.4, 0 4.8" fill="var(--_arrow)" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="4.8" refX="0" refY="2.4" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.4, 8 4.8" fill="var(--_arrow)" />
+  </marker>
+</defs>
+<rect x="40.00000000000006" y="140" width="154.64999999999998" height="580" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+<rect x="40.00000000000006" y="140" width="154.64999999999998" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+<text x="52.00000000000006" y="154" dy="0.35em" font-size="12" font-weight="600" fill="var(--_text-sec)">&quot;Linear Pipeline&quot;</text>
+<rect x="214.65000000000012" y="140" width="241.03750000000008" height="424" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+<rect x="214.65000000000012" y="140" width="241.03750000000008" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+<text x="226.65000000000012" y="154" dy="0.35em" font-size="12" font-weight="600" fill="var(--_text-sec)">&quot;DAG Parallel Execution&quot;</text>
+<rect x="475.6875000000001" y="140" width="221.58750000000003" height="580" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+<rect x="475.6875000000001" y="140" width="221.58750000000003" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+<text x="487.6875000000001" y="154" dy="0.35em" font-size="12" font-weight="600" fill="var(--_text-sec)">&quot;Multi-Party Debate&quot;</text>
+<polyline points="117.32500000000016,232 117.32500000000016,352" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="117.32500000000016,388 117.32500000000016,508" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="117.32500000000016,544 117.32500000000016,664" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="320.97500000000014,232 320.97500000000014,252 279.46250000000015,252 279.46250000000015,352" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="320.97500000000014,232 320.97500000000014,252 389.08750000000015,252 389.08750000000015,352" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="279.46250000000015,388 279.46250000000015,526 276.3750000000001,526" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="389.08750000000015,388 389.08750000000015,526 365.57500000000016,526" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="564.0750000000002,232 564.0750000000002,252 518.9875000000002,252 518.9875000000002,682 515.9000000000002,682" fill="none" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline points="597.3750000000002,388 597.3750000000002,408 564.0750000000002,408 564.0750000000002,664" fill="none" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline points="630.6750000000002,544 630.6750000000002,682 612.2500000000001,682" fill="none" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline points="564.0750000000002,232 564.0750000000002,252 597.3750000000002,252 597.3750000000002,352" fill="none" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="4 4" marker-end="url(#arrowhead)" marker-start="url(#arrowhead-start)" />
+<polyline points="597.3750000000002,388 597.3750000000002,408 630.6750000000002,408 630.6750000000002,508" fill="none" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="4 4" marker-end="url(#arrowhead)" marker-start="url(#arrowhead-start)" />
+<polyline points="334.27500000000015,76 334.27500000000015,96 117.32500000000016,96 117.32500000000016,196" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="334.27500000000015,76 334.27500000000015,96 320.97500000000014,96 320.97500000000014,196" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="334.27500000000015,76 334.27500000000015,96 564.0750000000002,96 564.0750000000002,196" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<rect x="186.00000000000014" y="40" width="296.55" height="36" rx="0" ry="0" fill="#e7f5ff" stroke="#1971c2" stroke-width="2px" />
+<rect x="72.72500000000016" y="196" width="89.2" height="36" rx="0" ry="0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="0.75" />
+<rect x="62.000000000000156" y="352" width="110.65" height="36" rx="0" ry="0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="0.75" />
+<rect x="79.87500000000016" y="508" width="74.9" height="36" rx="0" ry="0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="0.75" />
+<rect x="72.72500000000016" y="664" width="89.2" height="36" rx="0" ry="0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="0.75" />
+<rect x="283.52500000000015" y="196" width="74.9" height="36" rx="0" ry="0" fill="#d3f9d8" stroke="#2f9e44" stroke-width="0.75" />
+<rect x="238.43750000000014" y="352" width="82.05000000000001" height="36" rx="0" ry="0" fill="#d3f9d8" stroke="#2f9e44" stroke-width="0.75" />
+<rect x="344.4875000000001" y="352" width="89.2" height="36" rx="0" ry="0" fill="#d3f9d8" stroke="#2f9e44" stroke-width="0.75" />
+<rect x="276.3750000000001" y="508" width="89.2" height="36" rx="0" ry="0" fill="#d3f9d8" stroke="#2f9e44" stroke-width="0.75" />
+<rect x="519.4750000000001" y="196" width="89.2" height="36" rx="0" ry="0" fill="#e5dbff" stroke="#5f3dc4" stroke-width="0.75" />
+<rect x="515.9000000000002" y="664" width="96.35000000000001" height="36" rx="0" ry="0" fill="#e5dbff" stroke="#5f3dc4" stroke-width="0.75" />
+<rect x="552.7750000000002" y="352" width="89.2" height="36" rx="0" ry="0" fill="#e5dbff" stroke="#5f3dc4" stroke-width="0.75" />
+<rect x="586.0750000000002" y="508" width="89.2" height="36" rx="0" ry="0" fill="#e5dbff" stroke="#5f3dc4" stroke-width="0.75" />
+<text x="334.27500000000015" y="58" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="var(--_text)">Team Tasks - Three Coordination Modes</text>
+<text x="117.32500000000016" y="214" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="var(--_text)">analyzer</text>
+<text x="117.32500000000016" y="370" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="var(--_text)">implementer</text>
+<text x="117.32500000000016" y="526" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="var(--_text)">tester</text>
+<text x="117.32500000000016" y="682" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="var(--_text)">deployer</text>
+<text x="320.97500000000014" y="214" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="var(--_text)">design</text>
+<text x="279.46250000000015" y="370" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="var(--_text)">backend</text>
+<text x="389.08750000000015" y="370" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="var(--_text)">frontend</text>
+<text x="320.97500000000014" y="526" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="var(--_text)">e2e-test</text>
+<text x="564.0750000000002" y="214" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="var(--_text)">Expert A</text>
+<text x="564.0750000000002" y="682" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="var(--_text)">Synthesis</text>
+<text x="597.3750000000002" y="370" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="var(--_text)">Expert B</text>
+<text x="630.6750000000002" y="526" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="var(--_text)">Expert C</text>
 </svg>
