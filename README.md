@@ -5,7 +5,7 @@
 Multi-agent task coordination for Claude Code. Orchestrate development workflows using JSON task files with three modes: linear pipelines, DAG-based parallel execution, and multi-party debate.
 
 <p align="center">
-  <img src="docs/three-modes-overview.svg" alt="Three Modes Overview" width="800"/>
+  <img src="docs/three-modes-overview.png" alt="Three Modes Overview" width="800"/>
 </p>
 
 ## What It Does
@@ -64,13 +64,13 @@ $TM ready my-feature   # shows tasks with all dependencies met
 ### DAG Dispatch Flow
 
 <p align="center">
-  <img src="docs/dag-dispatch-flow.svg" alt="DAG Dispatch Flow" width="700"/>
+  <img src="docs/dag-dispatch-flow.png" alt="DAG Dispatch Flow" width="700"/>
 </p>
 
 ### Debate Mode
 
 <p align="center">
-  <img src="docs/debate-mode-flow.svg" alt="Debate Mode Flow" width="600"/>
+  <img src="docs/debate-mode-flow.png" alt="Debate Mode Flow" width="600"/>
 </p>
 
 ```bash

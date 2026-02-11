@@ -5,7 +5,7 @@
 Claude Code 的多代理任務協調。使用 JSON 任務檔案編排開發工作流程，支援三種模式：線性管線、DAG 並行執行和多方辯論。
 
 <p align="center">
-  <img src="docs/three-modes-overview.svg" alt="三種模式總覽" width="800"/>
+  <img src="docs/three-modes-overview.png" alt="三種模式總覽" width="800"/>
 </p>
 
 ## 功能特色
@@ -64,13 +64,13 @@ $TM ready my-feature   # 顯示所有依賴都已滿足的任務
 ### DAG 派發流程
 
 <p align="center">
-  <img src="docs/dag-dispatch-flow.svg" alt="DAG 派發流程" width="700"/>
+  <img src="docs/dag-dispatch-flow.png" alt="DAG 派發流程" width="700"/>
 </p>
 
 ### 辯論模式
 
 <p align="center">
-  <img src="docs/debate-mode-flow.svg" alt="辯論模式流程" width="600"/>
+  <img src="docs/debate-mode-flow.png" alt="辯論模式流程" width="600"/>
 </p>
 
 ```bash
