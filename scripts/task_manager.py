@@ -7,7 +7,7 @@ Modes:
   debate  – N agents examine same question, cross-review, synthesize.
 
 Data dir: ~/.claude/data/team-tasks/ (override with TEAM_TASKS_DIR)
-No external dependencies — Python 3.12+ stdlib only.
+No external dependencies — Python 3.9+ stdlib only.
 """
 
 from __future__ import annotations
@@ -302,6 +302,27 @@ def cmd_ready(args: argparse.Namespace) -> None:
             print(f"  • {t['id']} (agent: {t['agent']})")
             if t.get("description"):
                 print(f"    {t['description']}")
+
+    # Advisory preflight check (non-blocking)
+    _shared = os.path.join(os.path.dirname(__file__), "..", "..", "_shared")
+    if os.path.isdir(_shared):
+        sys.path.insert(0, _shared)
+        try:
+            from preflight import run_preflight, Verdict, format_result
+            pf = run_preflight()
+            if pf.verdict == Verdict.BLOCK:
+                print(f"\n⚠️  System resources critical. Dispatching agents may cause OOM.",
+                      file=sys.stderr)
+                print(format_result(pf), file=sys.stderr)
+            elif pf.verdict == Verdict.WARN:
+                print(f"\n⚠️  System resources elevated. Monitor memory usage.",
+                      file=sys.stderr)
+                print(format_result(pf), file=sys.stderr)
+        except ImportError:
+            pass
+        finally:
+            if _shared in sys.path:
+                sys.path.remove(_shared)
 
 
 def cmd_update(args: argparse.Namespace) -> None:
