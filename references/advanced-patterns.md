@@ -2,6 +2,109 @@
 
 進階使用模式與整合範例。
 
+## Native Agent Teams 整合
+
+### 啟用 Agent Teams
+
+在 `~/.claude/settings.json` 加入：
+
+```json
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  }
+}
+```
+
+### Agent Teams 提示詞範本
+
+#### 研究型團隊（最安全的入門方式，不改 code）
+
+```
+建立一個 3 人 agent team 來研究 {topic}：
+- Teammate 1: 從技術可行性角度分析
+- Teammate 2: 從使用者體驗角度分析
+- Teammate 3: 當魔鬼代言人，挑戰前兩位的觀點
+
+不要寫任何程式碼，只做研究和分析。
+每個 teammate 完成後在 task list 記錄結論。
+```
+
+#### 平行開發團隊
+
+```
+建立一個 agent team 來實作 {feature}：
+- Teammate 1 (Sonnet): 後端 API ({api-desc})
+- Teammate 2 (Sonnet): 前端元件 ({ui-desc})
+- Teammate 3 (Sonnet): 測試 (等前兩位完成後再開始)
+
+使用 Plan Approval — 每個 teammate 先寫計畫，我核准後再實作。
+不同 teammate 負責不同檔案，避免衝突。
+```
+
+#### Code Review 團隊
+
+```
+建立一個 agent team 來 review 這個 PR：
+- Teammate 1: 安全性審查（OWASP Top 10）
+- Teammate 2: 效能分析（N+1 queries, memory leaks）
+- Teammate 3: 測試覆蓋率檢查
+
+每個 teammate 獨立審查，完成後互相 cross-review。
+最後我會綜合結論。
+```
+
+### Hybrid 模式：task_manager.py + Agent Teams
+
+結合持久化任務管理和即時協作：
+
+```bash
+TM="python3 ~/.claude/skills/team-tasks/scripts/task_manager.py"
+
+# 1. 用 task_manager 規劃結構
+$TM init refactor-auth --mode dag -g "Refactor authentication to OAuth2"
+$TM add refactor-auth design -a planner --desc "Design OAuth2 flow"
+$TM add refactor-auth backend -a coder --deps "design" --desc "Implement OAuth2 provider"
+$TM add refactor-auth frontend -a ui-dev --deps "design" --desc "Update login UI"
+$TM add refactor-auth migrate -a coder --deps "backend" --desc "Write DB migration"
+$TM add refactor-auth test -a tester --deps "backend,frontend,migrate" --desc "E2E tests"
+
+# 2. 查看依賴圖
+$TM graph refactor-auth
+```
+
+然後在 Claude Code 對話中使用 Agent Teams 執行：
+
+```
+我已用 task_manager.py 建好 refactor-auth 的任務結構。
+請查看 ready 任務，建立 Agent Team 來執行。
+
+完成每個任務後，執行以下指令回報：
+python3 ~/.claude/skills/team-tasks/scripts/task_manager.py update refactor-auth <task-id> done
+python3 ~/.claude/skills/team-tasks/scripts/task_manager.py result refactor-auth <task-id> "<summary>"
+```
+
+### Agent Teams 最佳實踐
+
+1. **任務大小** — 每個 teammate 分配 5-6 個任務，不要太碎也不要太大
+2. **避免檔案衝突** — 不同 teammate 負責不同檔案
+3. **給足 context** — Teammates 不繼承 Lead 的對話歷史，spawn 時要給完整說明
+4. **先研究再實作** — 新手先用研究型團隊（不改 code），熟悉後再平行開發
+5. **Delegate Mode** — 按 Shift+Tab 讓 Lead 專注協調，避免自己也開始寫 code
+
+### Subagents vs Agent Teams 決策
+
+| 情境 | 推薦 |
+|------|------|
+| 單一聚焦任務，只需結果 | Subagents（Task tool） |
+| 需要 agents 互相討論 | Agent Teams |
+| 混合 Claude + Gemini + Codex | Custom Pipeline + Headless |
+| 跨 session 追蹤進度 | Custom Pipeline（task_manager.py） |
+| 即時平行開發 + 互相 review | Agent Teams |
+| CI/CD 自動化整合 | Custom Pipeline + Headless |
+
+---
+
 ## 多 Agent 自動派發（DAG + Headless）
 
 透過 shell script 自動化 DAG 任務派發迴圈：
