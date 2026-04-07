@@ -10,7 +10,7 @@ Claude Code 的多代理任務協調。使用 JSON 任務檔案編排開發工�
 
 ## 功能特色
 
-`team-tasks` 提供 Python CLI（`task_manager.py`），讓您可以：
+`team-tasks` 提供 CLI（`~/.local/bin/maestro project`），讓您可以：
 
 - **線性管線** — 按嚴格順序執行任務（例如 程式碼 -> 測試 -> 文件）。適合修復 bug 和逐步驗證。
 - **DAG（有向無環圖）** — 定義帶有依賴關係的任務，並行執行獨立任務。適合具有多個模組的大型功能。
@@ -31,34 +31,28 @@ git clone https://github.com/joneshong-skills/team-tasks.git ~/.claude/skills/te
 
 ## 使用方式
 
-設定 CLI 別名：
-
-```bash
-TM="python3 ~/.claude/skills/team-tasks/scripts/task_manager.py"
-```
-
 ### 線性模式
 
 ```bash
-$TM init my-api --mode linear \
+~/.local/bin/maestro project create my-api --mode linear \
   -g "Build REST API and test" \
   -p "code-agent,test-agent,docs-agent"
 
-$TM next my-api
-$TM update my-api code-agent done
-$TM result my-api code-agent "API implemented with CRUD endpoints"
+~/.local/bin/maestro project next my-api
+~/.local/bin/maestro project update my-api code-agent done
+~/.local/bin/maestro project result my-api code-agent "API implemented with CRUD endpoints"
 ```
 
 ### DAG 模式
 
 ```bash
-$TM init my-feature --mode dag -g "Build user system"
-$TM add my-feature design -a planner --desc "Design API spec"
-$TM add my-feature backend -a code-agent --deps "design" --desc "Implement backend"
-$TM add my-feature frontend -a ui-agent --deps "design" --desc "Implement frontend"
-$TM add my-feature e2e-test -a test-agent --deps "backend,frontend" --desc "E2E tests"
+~/.local/bin/maestro project create my-feature --mode dag -g "Build user system"
+~/.local/bin/maestro project add-task my-feature design -a planner --desc "Design API spec"
+~/.local/bin/maestro project add-task my-feature backend -a code-agent --deps "design" --desc "Implement backend"
+~/.local/bin/maestro project add-task my-feature frontend -a ui-agent --deps "design" --desc "Implement frontend"
+~/.local/bin/maestro project add-task my-feature e2e-test -a test-agent --deps "backend,frontend" --desc "E2E tests"
 
-$TM ready my-feature   # 顯示所有依賴都已滿足的任務
+~/.local/bin/maestro project ready my-feature   # 顯示所有依賴都已滿足的任務
 ```
 
 ### DAG 派發流程
@@ -74,34 +68,34 @@ $TM ready my-feature   # 顯示所有依賴都已滿足的任務
 </p>
 
 ```bash
-$TM init arch-review --mode debate -g "Microservices vs monolith?"
-$TM add-debater arch-review security-expert -p "Security perspective"
-$TM add-debater arch-review perf-expert -p "Performance perspective"
+~/.local/bin/maestro project create arch-review --mode debate -g "Microservices vs monolith?"
+~/.local/bin/maestro project add-debater arch-review security-expert -p "Security perspective"
+~/.local/bin/maestro project add-debater arch-review perf-expert -p "Performance perspective"
 
-$TM round arch-review start
-$TM round arch-review submit -d security-expert -t "Microservices offer better isolation..."
-$TM round arch-review cross-review
-$TM round arch-review synthesize
+~/.local/bin/maestro project round arch-review start
+~/.local/bin/maestro project round arch-review submit -d security-expert -t "Microservices offer better isolation..."
+~/.local/bin/maestro project round arch-review cross-review
+~/.local/bin/maestro project round arch-review synthesize
 ```
 
 ### 分派到 Headless 代理
 
 ```bash
-task=$($TM ready my-feature --json | jq -r '.[0].id')
-desc=$($TM ready my-feature --json | jq -r '.[0].description')
+task=$(~/.local/bin/maestro project ready my-feature --json | jq -r '.[0].id')
+desc=$(~/.local/bin/maestro project ready my-feature --json | jq -r '.[0].description')
 
-$TM update my-feature "$task" in-progress
+~/.local/bin/maestro project update my-feature "$task" in-progress
 result=$(claude -p "$desc" --allowedTools "Read,Edit,Bash" --output-format json | jq -r '.result')
-$TM result my-feature "$task" "$result"
-$TM update my-feature "$task" done
+~/.local/bin/maestro project result my-feature "$task" "$result"
+~/.local/bin/maestro project update my-feature "$task" done
 ```
 
 ## 命令參考
 
 | 命令 | 模式 | 說明 |
 |------|------|------|
-| `init <project>` | 全部 | 建立專案（`--mode linear\|dag\|debate`） |
-| `add <project> <task>` | DAG | 新增任務（`--deps`、`--agent`、`--desc`） |
+| `create <project>` | 全部 | 建立專案（`--mode linear\|dag\|debate`） |
+| `add-task <project> <task>` | DAG | 新增任務（`--deps`、`--agent`、`--desc`） |
 | `add-debater <project> <id>` | 辯論 | 新增辯論者（`--perspective`） |
 | `status <project>` | 全部 | 顯示專案狀態 |
 | `next <project>` | 線性 | 取得下一階段 |

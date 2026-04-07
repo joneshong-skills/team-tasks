@@ -66,7 +66,7 @@ export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
 # 確認環境變數
 echo $CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS
 # 或檢查 settings.json
-cat ~/.claude/settings.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('env',{}).get('CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS','未設定'))"
+cat ~/.claude/settings.json | ~/.local/bin/python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('env',{}).get('CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS','未設定'))"
 ```
 
 ### 快速開始
@@ -139,11 +139,11 @@ CLI 啟動時指定：`claude --teammate-mode in-process`
 CLI 路徑（所有指令使用此前綴）：
 
 ```bash
-TM="python3 ~/.claude/skills/team-tasks/scripts/task_manager.py"
+TM="~/.local/bin/python3 ~/.claude/skills/team-tasks/scripts/task_manager.py"
 ```
 
 > **zsh 注意事項**：使用 `$TM` 時務必加雙引號 `"$TM"` 以避免 word splitting 問題。
-> 或直接用完整路徑 `python3 ~/.claude/skills/team-tasks/scripts/task_manager.py`。
+> 或直接用完整路徑 `~/.local/bin/python3 ~/.claude/skills/team-tasks/scripts/task_manager.py`。
 
 資料目錄：`~/.claude/data/team-tasks/`（可透過 `TEAM_TASKS_DIR` 環境變數覆寫）
 
@@ -337,7 +337,7 @@ openclaw message send --channel telegram --target <group-id> \
 ### 範例：Hybrid 工作流
 
 ```bash
-TM="python3 ~/.claude/skills/team-tasks/scripts/task_manager.py"
+TM="~/.local/bin/python3 ~/.claude/skills/team-tasks/scripts/task_manager.py"
 
 # Step 1: 用 Custom Pipeline 規劃任務結構
 "$TM" init user-auth --mode dag -g "Build OAuth2 authentication system"
@@ -355,7 +355,7 @@ TM="python3 ~/.claude/skills/team-tasks/scripts/task_manager.py"
 完成後把結果寫回 task_manager.py。
 
 查看可派發任務：
-python3 ~/.claude/skills/team-tasks/scripts/task_manager.py ready user-auth
+~/.local/bin/python3 ~/.claude/skills/team-tasks/scripts/task_manager.py ready user-auth
 ```
 
 ### 何時用 Hybrid
@@ -365,6 +365,10 @@ python3 ~/.claude/skills/team-tasks/scripts/task_manager.py ready user-auth
 - 需要持久化紀錄（JSON 檔）作為審計或回顧用途
 
 ---
+
+## See Also
+
+- **`maestro`** — For cross-CLI dispatch and cost-optimized routing (Claude/Codex/Gemini), use `maestro` instead of team-tasks.
 
 ## Additional Resources
 
