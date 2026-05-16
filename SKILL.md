@@ -1,6 +1,6 @@
 ---
 name: team-tasks
-description: This skill should be used when the user asks to "coordinate agents", "manage team tasks", "create a pipeline", "dispatch work to agents", "run parallel tasks", "start a debate", "multi-agent workflow", "agent teams", "create a team", "spawn teammates", or discusses task orchestration, agent teams, pipeline coordination, DAG execution, or debate-style review.
+description: This skill should be used when the user asks to "coordinate agents", "manage team tasks", "create a pipeline", "dispatch work to agents", "run parallel tasks", "start a debate", "multi-agent workflow", "agent teams", "create a team", "spawn teammates", or discusses task orchestration, agent teams, pipeline coordination, DAG execution, or debate-style review. NOT for cross-CLI cost routing decisions — use maestro.
 version: 0.2.1
 tools: Read, Bash, Edit
 argument-hint: "<project-name> [--engine native|custom] [--mode linear|dag|debate]"
