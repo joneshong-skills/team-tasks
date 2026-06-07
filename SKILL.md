@@ -1,6 +1,6 @@
 ---
 name: team-tasks
-description: This skill should be used when the user asks to "coordinate agents", "manage team tasks", "create a pipeline", "dispatch work to agents", "run parallel tasks", "start a debate", "multi-agent workflow", "agent teams", "create a team", "spawn teammates", or discusses task orchestration, agent teams, pipeline coordination, DAG execution, or debate-style review. NOT for cross-CLI cost routing decisions — use maestro.
+description: "tasks, team, agents, coordinate, manage, create, pipeline"
 version: 0.2.1
 tools: Read, Bash, Edit
 argument-hint: "<project-name> [--engine native|custom] [--mode linear|dag|debate]"
@@ -32,7 +32,7 @@ argument-hint: "<project-name> [--engine native|custom] [--mode linear|dag|debat
 | **溝通** | Teammates 互相直接通訊 | 透過 JSON 檔間接傳遞 |
 | **協調** | 自動認領任務、即時信箱 | 手動/腳本派發 |
 | **持久化** | Session 結束即消失 | JSON 檔永久保存 |
-| **混合 CLI** | 僅 Claude Code | Claude + Gemini + Codex（headless 或 interactive） |
+| **混合 CLI** | 僅 Claude Code | Claude + Antigravity + Codex（headless 或 interactive） |
 | **Token 成本** | 較高（每 teammate 獨立實例） | 較低（headless 單次呼叫）或中等（interactive 多輪） |
 | **可視化** | tmux/iTerm2 分割面板 | ASCII 依賴圖 |
 | **Resume** | 不支援（實驗性限制） | 支援（JSON 狀態檔） |
@@ -270,7 +270,7 @@ result=$(claude -p "$desc" --cwd /path/to/project --allowedTools "Read,Edit,Bash
 **Interactive 模式**（tmux 多輪對話，保留 context）：
 
 ```bash
-# 使用 claude-code-interactive / codex-cli-interactive / gemini-cli-interactive
+# 使用 claude-code-interactive / codex-cli-interactive / antigravity-cli-interactive
 # 透過 tmux send-keys 進行多輪交互
 
 # 啟動 interactive session
@@ -368,7 +368,7 @@ TM="~/.local/bin/python3 ~/.claude/skills/team-tasks/scripts/task_manager.py"
 
 ## See Also
 
-- **`maestro`** — For cross-CLI dispatch and cost-optimized routing (Claude/Codex/Gemini), use `maestro` instead of team-tasks.
+- **`maestro`** — For cross-CLI dispatch and cost-optimized routing (Claude/Codex/Antigravity), use `maestro` instead of team-tasks.
 
 ## Additional Resources
 

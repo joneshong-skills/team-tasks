@@ -168,7 +168,7 @@ dispatch_task() {
             claude -p "$desc" --allowedTools "Read,Edit,Bash" --output-format json | jq -r '.result'
             ;;
         gemini|review-agent)
-            gemini -p "$desc" 2>/dev/null
+            agy -p "$desc" 2>/dev/null
             ;;
         codex|refactor-agent)
             codex exec "$desc" --full-auto 2>/dev/null
