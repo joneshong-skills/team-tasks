@@ -90,12 +90,14 @@ Teammate 1: API design. Teammate 2: implementation. Teammate 3: code review.
 
 | 元件 | 角色 |
 |------|------|
-| **Team Lead** | 主 session，建立團隊、產生 teammates、協調工作 |
+| **Team Lead** | 主 session，產生 teammates、協調工作 |
 | **Teammates** | 獨立 Claude Code 實例，各自處理分配的任務 |
 | **Task List** | 共享任務清單，支援依賴追蹤，teammates 可自行認領 |
 | **Mailbox** | agents 之間的直接通訊系統 |
 
-解鎖的工具：`TeamCreate`、`TaskCreate`、`TaskUpdate`、`TaskList`、`SendMessage`
+解鎖的工具：`TaskCreate`、`TaskUpdate`、`TaskList`、`TaskGet`、`SendMessage`
+
+**`TeamCreate` 已不存在**（2026-08-16 於 CC 2.1.233 實測，`ToolSearch select:TeamCreate` 查無）。現在是**單一隱含團隊**——`Agent` tool 的 `team_name` 參數同步標記 Deprecated 且會被忽略。產生 teammate 直接用 `Agent` tool 開 subagent，不需要也無法先「建立團隊」。
 
 ### 顯示模式
 
